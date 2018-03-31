@@ -1,0 +1,4 @@
+select ST_Length(ST_Line_Substring(l.line_geom,
+ST_Line_Locate_Point(l.line_geom,s2.loc),
+ST_Line_Locate_Point(l.line_geom,s1.loc)
+)) from lines l, muni_stop s1, muni_stop s2, muni_directionstop ds1, muni_directionstop ds2, muni_route r, muni_direction d where r.numtag='F' and d.route_id=r.id and d.name='Outbound' and ((ds1.seq=1 and s1.id=ds1.stop_id and ds1.direction_id=d.id) and  (ds2.seq=2 and s2.id=ds2.stop_id and ds2.direction_id=d.id )) ;
